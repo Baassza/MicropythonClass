@@ -1,0 +1,75 @@
+<html>
+
+<head>
+    <title>ระบบควบคุมรถผ่าน WiFi</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+</head>
+<style>
+    h1 {
+        text-align: center;
+    }
+
+    button {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        margin-top: -50px;
+        margin-left: -50px;
+        border-radius: 50%;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        font-size: 36pt;
+    }
+
+    button:active {
+        background-color: red;
+    }
+
+    #X {
+        top: 25%;
+        left: 50%;
+    }
+
+    #Y {
+        top: 50%;
+        left: 35%;
+    }
+
+    #A {
+        top: 50%;
+        left: 65%;
+    }
+
+    #B {
+        top: 75%;
+        left: 50%;
+    }
+</style>
+
+<body>
+    <h1>ระบบควบคุมรถผ่าน WiFi</h1>
+    <button id="X" type="button">X</button>
+    <button id="Y" type="button">Y</button>
+    <button id="A" type="button">A</button>
+    <button id="B" type="button">B</button>
+</body>
+<script>
+    const arrBtn = ['X', 'Y', 'A', 'B'];
+    const direction = ['forward', 'left', 'right', 'backward'];
+    const setIntervalArr = [];
+    arrBtn.forEach((btn, i) => {
+        document.getElementById(btn).addEventListener("mousedown", function () {
+            setIntervalArr[i] = setInterval(async function () {
+                await fetch('/' + direction[i]);
+                console.log(direction[i]);
+            }, 10)
+        });
+        document.getElementById(btn).addEventListener("mouseup", function () {
+            clearInterval(setIntervalArr[i]);
+        });
+    })
+</script>
+
+</html>
