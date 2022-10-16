@@ -8,6 +8,12 @@
 <style>
     h1 {
         text-align: center;
+        -webkit-touch-callout: none; 
+        -webkit-user-select: none; 
+        -khtml-user-select: none; 
+        -moz-user-select: none; 
+        -ms-user-select: none; 
+        user-select: none;
     }
 
     button {
@@ -21,6 +27,12 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         cursor: pointer;
         font-size: 36pt;
+        -webkit-touch-callout: none; 
+        -webkit-user-select: none; 
+        -khtml-user-select: none; 
+        -moz-user-select: none; 
+        -ms-user-select: none; 
+        user-select: none;
     }
 
     button:active {
@@ -64,10 +76,38 @@
             setIntervalArr[i] = setInterval(async function () {
                 await fetch('/' + direction[i]);
                 console.log(direction[i]);
-            }, 10)
+            }, 100)
         });
-        document.getElementById(btn).addEventListener("mouseup", function () {
-            clearInterval(setIntervalArr[i]);
+        document.getElementById(btn).addEventListener("mouseup", async function () {
+            clearInterval(setIntervalArr[i]); 
+            await fetch('/stop');
+            console.log('stop');
+        });
+         document.getElementById(btn).addEventListener("touchstart", function () {
+            setIntervalArr[i] = setInterval(async function () {
+                await fetch('/' + direction[i]);
+                console.log(direction[i]);
+            }, 100)
+        });
+        document.getElementById(btn).addEventListener("touchend", async function () {
+            clearInterval(setIntervalArr[i]); 
+            await fetch('/stop');
+            console.log('stop');
+        });
+        document.getElementById(btn).addEventListener("touchcancel", async function () {
+            clearInterval(setIntervalArr[i]); 
+            await fetch('/stop');
+            console.log('stop');
+        });
+        document.getElementById(btn).addEventListener("touchleave", async function () {
+            clearInterval(setIntervalArr[i]); 
+            await fetch('/stop');
+            console.log('stop');
+        });
+        document.getElementById(btn).addEventListener("touchmove", async function () {
+            clearInterval(setIntervalArr[i]); 
+            await fetch('/stop');
+            console.log('stop');
         });
     })
 </script>
